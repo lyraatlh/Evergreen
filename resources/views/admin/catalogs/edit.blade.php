@@ -1,5 +1,5 @@
 <x-default-layout title="Edit Catalog" section_title="Edit Catalog">
-    <form action="{{ route('catalogs.update', $catalog) }}" method="POST">
+    <form action="{{ route('admin.catalogs.update', $catalog) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -22,7 +22,7 @@
 
             <!-- Action Buttons -->
             <div class="flex gap-4 self-end mt-6">
-                <a href="{{ route('catalogs.index') }}"
+                <a href="{{ route('admin.catalogs.index') }}"
                     class="bg-white text-blue-600 border border-blue-500 px-5 py-2 rounded-lg shadow-md hover:bg-blue-50 transition duration-200">
                     Cancel
                 </a>

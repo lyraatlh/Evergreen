@@ -1,4 +1,4 @@
-<x-default-layout title="Plant" section_title="Plants">
+<x-default-layout title="Plant" section_title="List of Plants">
     @if (session('success'))
         <div class="bg-green-50 border border-green-500 text-green-500 px-4 py-2 rounded-md mb-4">
             {{ session('success') }}
@@ -6,7 +6,7 @@
     @endif
     @can('store-student')
     <div class="flex mb-6">
-        <a href="{{ route('plants.create') }}" class="bg-blue-50 text-blue-500 border border-blue-500 px-4 py-2 flex items-center gap-2 rounded-lg shadow-md hover:bg-blue-100 duration-200">
+        <a href="{{ route('admin.plants.create') }}" class="bg-blue-50 text-blue-500 border border-blue-500 px-4 py-2 flex items-center gap-2 rounded-lg shadow-md hover:bg-blue-100 duration-200">
             <i class="ph ph-plus block text-blue-500"></i>
             Add Plant
         </a>
@@ -33,16 +33,16 @@
                         <td class="py-4 px-6 text-center">Rp {{ number_format($plant->Price) }}</td>
                         <td class="py-4 px-6 text-center">{{ $plant->Stock }}</td>
                         <td class="py-4 px-6 flex justify-center gap-3">
-                            <a href="{{ route('plants.show', $plant->Plant_ID) }}" class="bg-blue-50 border border-blue-500 p-2 rounded-lg shadow-md hover:bg-blue-100">
+                            <a href="{{ route('admin.plants.show', $plant->Plant_ID) }}" class="bg-blue-50 border border-blue-500 p-2 rounded-lg shadow-md hover:bg-blue-100">
                                 <i class="ph ph-eye block text-blue-500"></i>
                             </a>
                             @can('edit-student')
-                            <a href="{{ route('plants.edit', $plant->Plant_ID) }}" class="bg-yellow-50 border border-yellow-500 p-2 rounded-lg shadow-md hover:bg-yellow-100">
+                            <a href="{{ route('admin.plants.edit', $plant->Plant_ID) }}" class="bg-yellow-50 border border-yellow-500 p-2 rounded-lg shadow-md hover:bg-yellow-100">
                                 <i class="ph ph-note-pencil block text-yellow-500"></i>
                             </a>
                             @endcan
                             @can('destroy-student')
-                            <form onsubmit="return confirm('Are you sure?')" method="POST" action="{{ route('plants.destroy', $plant->Plant_ID) }}">
+                            <form onsubmit="return confirm('Are you sure?')" method="POST" action="{{ route('admin.plants.destroy', $plant->Plant_ID) }}">
                                 @method("DELETE")
                                 @csrf
                                 <button type="submit" class="bg-red-50 border border-red-500 p-2 rounded-lg shadow-md hover:bg-red-100">

@@ -16,7 +16,7 @@ class ProductController extends Controller
         // }
 
         $plants = DimPlant::with('type')->get();
-        return view('plants.index', compact('plants'));
+        return view('admin.plants.index', compact('plants'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class ProductController extends Controller
         // }
 
         $types = Catalog::all();
-        return view('plants.create', compact('types'));
+        return view('admin.plants.create', compact('types'));
     }
 
     public function store(Request $request)
@@ -51,7 +51,7 @@ class ProductController extends Controller
             'Stock' => $validated['Stock'],
         ]);
 
-        return redirect()->route('plants.index')->with('success', 'Plant created successfully');
+        return redirect()->route('admin.plants.index')->with('success', 'Plant created successfully');
     }
 
     public function show($id)
@@ -61,7 +61,7 @@ class ProductController extends Controller
         // }
 
         $plant = DimPlant::with('type', 'image')->findOrFail($id);
-        return view('plants.show', compact('plant'));
+        return view('admin.plants.show', compact('plant'));
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class ProductController extends Controller
 
         $plant = DimPlant::findOrFail($id);
         $types = Catalog::all(); // ganti dari $catalogs ke $types
-        return view('plants.edit', compact('plant', 'types'));
+        return view('admin.plants.edit', compact('plant', 'types'));
     }
 
     public function update(Request $request, $id)
@@ -99,18 +99,18 @@ class ProductController extends Controller
             'Stock' => $validated['Stock'],
         ]);
 
-        return redirect()->route('plants.index')->with('success', 'Plant updated successfully');
+        return redirect()->route('admin.plants.index')->with('success', 'Plant updated successfully');
     }
 
     public function destroy($id)
     {
-        if (! Gate::allows('destroy-plant')) {
-            abort(401);
-        }
+        // if (! Gate::allows('destroy-plant')) {
+        //     abort(401);
+        // }
 
         $plant = DimPlant::findOrFail($id);
         $plant->delete();
 
-        return redirect()->route('plants.index')->with('success', 'Plant deleted successfully');
+        return redirect()->route('admin.plants.index')->with('success', 'Plant deleted successfully');
     }
 }

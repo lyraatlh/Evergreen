@@ -20,7 +20,7 @@ Route::post('/login', [AuthController::class, "authenticate"])->name('auth.authe
 Route::delete('/logout', [AuthController::class, "logout"])->name('auth.logout');;
 
 // Admin
-Route::middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
@@ -33,18 +33,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/plants/{id}', [ProductController::class, 'update'])->name('plants.update');
     Route::delete('/plants/{id}', [ProductController::class, 'destroy'])->name('plants.destroy');
 
-    // Catalog routes
-    // Route::get('/catalogs', [CatalogController::class, 'index'])->name('catalogs.index');
-    // Route::get('/catalogs/create', [CatalogController::class, 'create'])->name('catalogs.create');
-    // Route::post('/catalogs', [CatalogController::class, 'store'])->name('catalogs.store');
-    // Route::get('/catalogs/{id}', [CatalogController::class, 'show'])->name('catalogs.show');
-    // Route::get('/catalogs/{id}/edit', [CatalogController::class, 'edit'])->name('catalogs.edit');
-    // Route::put('/catalogs/{id}', [CatalogController::class, 'update'])->name('catalogs.update');
-    // Route::delete('/catalogs/{id}', [CatalogController::class, 'destroy'])->name('catalogs.destroy');
-
     Route::resource('catalogs', CatalogController::class);
     Route::resource('plants', ProductController::class);
 });
 
 // Shop route (public access to view plants)
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
+
+// Redirect untuk backward compatibility
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect()->route('admin.dashboard');
+    });
+    Route::get('/profile', function () {
+        return redirect()->route('admin.profile.index');
+    });
+});

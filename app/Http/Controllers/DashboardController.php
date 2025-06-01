@@ -14,6 +14,6 @@ class DashboardController extends Controller
 
         $catalogs = Catalog::withCount('plants')->get();
 
-        return view('dashboard', compact('totalPlants', 'totalCatalogs', 'catalogs'));
+        return view('admin.dashboard', compact('totalPlants', 'totalCatalogs', 'catalogs'));
     }
 }

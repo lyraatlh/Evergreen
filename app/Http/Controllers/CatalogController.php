@@ -10,12 +10,12 @@ class CatalogController extends Controller
     public function index()
     {
         $catalogs = Catalog::all();
-        return view('catalogs.index', compact('catalogs'));
+        return view('admin.catalogs.index', compact('catalogs'));
     }
 
     public function create()
     {
-        return view('catalogs.create');
+        return view('admin.catalogs.create');
     }
 
     public function store(Request $request)
@@ -27,17 +27,17 @@ class CatalogController extends Controller
 
         Catalog::create($request->all());
 
-        return redirect()->route('catalogs.index')->with('success', 'Catalog created successfully');
+        return redirect()->route('admin.catalogs.index')->with('success', 'Catalog created successfully');
     }
 
     public function show(Catalog $catalog)
     {
-        return view('catalogs.show', compact('catalog'));
+        return view('admin.catalogs.show', compact('catalog'));
     }
 
     public function edit(Catalog $catalog)
     {
-        return view('catalogs.edit', compact('catalog'));
+        return view('admin.catalogs.edit', compact('catalog'));
     }
 
     public function update(Request $request, Catalog $catalog)
@@ -49,12 +49,12 @@ class CatalogController extends Controller
 
         $catalog->update($request->all());
 
-        return redirect()->route('catalogs.index')->with('success', 'Catalog updated successfully');
+        return redirect()->route('admin.catalogs.index')->with('success', 'Catalog updated successfully');
     }
 
     public function destroy(Catalog $catalog)
     {
         $catalog->delete();
-        return redirect()->route('catalogs.index')->with('success', 'Catalog deleted successfully');
+        return redirect()->route('admin.catalogs.index')->with('success', 'Catalog deleted successfully');
     }
 }

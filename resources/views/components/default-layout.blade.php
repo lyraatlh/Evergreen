@@ -163,22 +163,22 @@
             <nav>
                 <ul class="hidden sm:flex">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
+                        <a href="{{ route('admin.dashboard') }}" class="{{ request()->is('dashboard') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
                         Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('plants.index') }}" class="{{ request()->is('plants') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
+                        <a href="{{ route('admin.plants.index') }}" class="{{ request()->is('plants') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
                         Plants
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('catalogs.index') }}" class="{{ request()->is('majors') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
+                        <a href="{{ route('admin.catalogs.index') }}" class="{{ request()->is('majors') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
                         Catalogs
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('profile.index') }}" class="{{ request()->is('profile') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
+                        <a href="{{ route('admin.profile.index') }}" class="{{ request()->is('profile') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
                         Profile
                         </a>
                     </li>
@@ -194,22 +194,22 @@
             <div x-show="open" class="bg-white border border-zinc-300 shadow-lg sm:hidden absolute top-12 right-3">
                 <ul class="flex flex-col gap-2 py-2 px-4">
                     <li x-on:click="open = !open">
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
+                        <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
                         Dashboard
                         </a>
                     </li>
                     <li x-on:click="open = !open">
-                        <a href="{{ route('plants.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
+                        <a href="{{ route('admin.plants.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
                         Plants
                         </a>
                     </li>
                     <li x-on:click="open = !open">
-                        <a href="{{ route('catalogs.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
+                        <a href="{{ route('admin.catalogs.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
                         Catalogs
                         </a>
                     </li>
                     <li x-on:click="open = !open">
-                        <a href="{{ route('profile.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
+                        <a href="{{ route('admin.profile.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
                         Profile
                         </a>
                     </li>

@@ -17,10 +17,22 @@
 <header class="container mx-auto py-3 flex justify-between items-center px-4">
     <a href="{{ url('/') }}" class="text-white text-lg font-bold">Ever<span>green</span></a>
     <nav class="flex space-x-6"> 
-    <a href="{{ route('home') }}" class="hover:underline">Home</a>
-    <a href="{{ route('catalogs.index') }}" class="hover:underline">Catalog</a>
-    <a href="{{ route('plants.index') }}" class="hover:underline">Shop</a> 
-    <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
+        <a href="{{ route('home') }}" class="hover:underline">Home</a>
+        @auth
+            @if(Auth::user()->isAdmin())
+                <a href="{{ route('catalogs.index') }}" class="hover:underline">Catalog</a>
+                <a href="{{ route('plants.index') }}" class="hover:underline">Shop</a> 
+                <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
+            @endif
+            <a href="{{ route('profile') }}" class="hover:underline">Profile</a>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="hover:underline">Logout</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="hover:underline">Login</a>
+            <a href="{{ route('register') }}" class="hover:underline">Register</a>
+        @endauth
     </nav>
 </header>
 

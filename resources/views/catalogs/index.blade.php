@@ -1,4 +1,9 @@
 <x-default-layout title="Catalogs" section_title="List of Catalogs">
+    @if (session('success'))
+        <div class="bg-green-50 border border-green-500 text-green-500 px-4 py-2 rounded-md mb-4">
+            {{ session('success') }}
+        </div>
+    @endif    
     <!-- Button for Adding Catalog -->
     <div class="flex mb-6">
         <a href="{{ route('catalogs.create') }}"

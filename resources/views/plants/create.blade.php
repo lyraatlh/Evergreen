@@ -5,6 +5,17 @@
             @csrf
             @method("POST")
 
+            <!-- Plant ID Input -->
+            <div class="flex flex-col gap-2">
+                <label for="Plant_ID" class="text-blue-600 font-semibold">Plant ID</label>
+                <input type="text" id="Plant_ID" name="Plant_ID" 
+                    class="px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-50"
+                    placeholder="Plant ID" value="{{ old('Plant_ID') }}">
+                @error('Plant_ID')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Plant Name Input -->
             <div class="flex flex-col gap-2">
                 <label for="Plant_Name" class="text-blue-600 font-semibold">Plant Name</label>

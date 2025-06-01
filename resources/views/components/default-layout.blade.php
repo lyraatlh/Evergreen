@@ -150,62 +150,67 @@
             background-color: #f1f8ff;
         }
     </style>
+
 </head>
 
 <body>
     <main>
-        <header x-data="{ open: false }" class="flex items-center justify-between sm:justify-start gap-8 bg-white border-b border-zinc-300 sticky top-0 px-3 sm:px-8 py-4">
-            <h2 class="text-lg sm:text-xl font-bold">Ever<span>green</span></h2>
-            {{-- Desktop Navigation --}}
+        <header x-data="{ open: false }"
+            class="flex items-center justify-between sm:justify-start gap-8 bg-white border-b
+            border-zinc-300 sticky top-0 px-3 sm:px-8 py-4">
+        <h2 class="text-lg sm:text-xl font-bold">Ever<span>green</span></h2>
+        <!-- desktop navigation -->
             <nav>
                 <ul class="hidden sm:flex">
                     <li>
                         <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
-                            Dashboard
+                        Dashboard
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('plants.index') }}" class="{{ request()->is('plants') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
-                            Plants
+                        Plants
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('catalogs.index') }}" class="{{ request()->is('majors') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
-                            Catalogs
+                        Catalogs
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('plants.index') }}" class="{{ request()->is('profile') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
-                            Profile
+                        <a href="{{ route('profile.index') }}" class="{{ request()->is('profile') ? 'text-black' : 'text-zinc-500' }} block px-2 py-1 rounded font-semibold hover:text-black text-sm">
+                        Profile
                         </a>
                     </li>
                 </ul>
             </nav>
-            {{-- Hamburger Menu --}}
+
+            <!-- hamburger menu -->
             <button x-on:click="open = !open" class="block sm:hidden bg-slate-50 border border-slate-400 p-2">
                 <i class="ph ph-list block text-slate-400"></i>
             </button>
-            {{-- Mobile Navigation --}}
+
+            <!-- mobile navigation -->
             <div x-show="open" class="bg-white border border-zinc-300 shadow-lg sm:hidden absolute top-12 right-3">
                 <ul class="flex flex-col gap-2 py-2 px-4">
                     <li x-on:click="open = !open">
                         <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
-                            Dashboard
+                        Dashboard
                         </a>
                     </li>
                     <li x-on:click="open = !open">
                         <a href="{{ route('plants.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
-                            Plants
+                        Plants
                         </a>
                     </li>
                     <li x-on:click="open = !open">
                         <a href="{{ route('catalogs.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
-                            Catalogs
+                        Catalogs
                         </a>
                     </li>
                     <li x-on:click="open = !open">
-                        <a href="{{ route('home') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
-                            Shop
+                        <a href="{{ route('profile.index') }}" class="block px-4 py-2 text-zinc-600 text-sm hover:bg-gray-100">
+                        Profile
                         </a>
                     </li>
                 </ul>

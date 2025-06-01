@@ -1,26 +1,49 @@
 <?php
 
 namespace App\Providers;
-use App\Repositories\Front\Interfaces\ProductRepositoryInterface;
-use App\Repositories\Front\ProductRepository;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
+use App\Models\User;
 
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register()
-    {
-        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
-    }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function register(): void
     {
         //
+    }
+    public function boot(): void
+    {
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
+        Gate::define("view-student", function (User $user) {
+            if ($user->role === "admin" || $user->role === "user") {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define("store-student", function (User $user) {
+            if ($user->role === "admin") {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define("edit-student", function (User $user) {
+            if ($user->role === "admin") {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define("destroy-student", function (User $user) {
+            if ($user->role === "admin") {
+                return true;
+            }
+            return false;
+        });
     }
 }

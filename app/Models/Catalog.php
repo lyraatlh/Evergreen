@@ -16,6 +16,7 @@ class Catalog extends Model
 
     protected $fillable = [
         'Type_Name',
+        'Type_ID',
     ];
 
     public function plants()

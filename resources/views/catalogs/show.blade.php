@@ -3,11 +3,17 @@
         
         <!-- Catalog Name -->
         <div class="flex flex-col gap-4">
+            <label for="Type_ID" class="text-lg font-semibold text-blue-600">Catalog ID</label>
+            <input type="text" id="Type_ID" name="Type_ID"
+                class="px-4 py-3 border border-blue-300 bg-blue-50 rounded-lg focus:ring-2 focus:ring-blue-300 transition duration-200"
+                value="{{ old('Type_ID', $catalog->Type_ID ?? '') }}"
+                placeholder="Example: 13">
+
             <label for="Type_Name" class="text-lg font-semibold text-blue-600">Catalog Name</label>
             <input type="text" id="Type_Name" name="Type_Name"
                 class="px-4 py-3 border border-blue-300 bg-blue-50 rounded-lg focus:ring-2 focus:ring-blue-300 transition duration-200"
                 value="{{ old('Type_Name', $catalog->Type_Name ?? '') }}"
-                placeholder="Example: Succulent Plants">
+                placeholder="Example: Succulent Plants">            
         </div>
 
         <!-- Action Buttons -->

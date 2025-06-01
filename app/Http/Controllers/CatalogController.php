@@ -22,11 +22,12 @@ class CatalogController extends Controller
     {
         $request->validate([
             'Type_Name' => 'required|string|max:255',
+            'Type_ID' => 'required|unique:plant_type,Type_ID',
         ]);
 
         Catalog::create($request->all());
 
-        return redirect()->route('catalogs.index')->with('success', 'Catalog berhasil ditambahkan.');
+        return redirect()->route('catalogs.index')->with('success', 'Catalog created successfully');
     }
 
     public function show(Catalog $catalog)
@@ -43,16 +44,17 @@ class CatalogController extends Controller
     {
         $request->validate([
             'Type_Name' => 'required|string|max:255',
+            'Type_ID' => 'required|unique:plant_type,Type_ID,' . $catalog->Type_ID . ',Type_ID',
         ]);
 
         $catalog->update($request->all());
 
-        return redirect()->route('catalogs.index')->with('success', 'Catalog berhasil diperbarui.');
+        return redirect()->route('catalogs.index')->with('success', 'Catalog updated successfully');
     }
 
     public function destroy(Catalog $catalog)
     {
         $catalog->delete();
-        return redirect()->route('catalogs.index')->with('success', 'Catalog berhasil dihapus.');
+        return redirect()->route('catalogs.index')->with('success', 'Catalog deleted successfully');
     }
 }

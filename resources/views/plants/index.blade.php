@@ -4,14 +4,14 @@
             {{ session('success') }}
         </div>
     @endif
-
+    @can('store-student')
     <div class="flex mb-6">
         <a href="{{ route('plants.create') }}" class="bg-blue-50 text-blue-500 border border-blue-500 px-4 py-2 flex items-center gap-2 rounded-lg shadow-md hover:bg-blue-100 duration-200">
             <i class="ph ph-plus block text-blue-500"></i>
             Add Plant
         </a>
     </div>
-
+    @endcan
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
             <thead class="bg-blue-50 text-blue-600">
@@ -36,9 +36,12 @@
                             <a href="{{ route('plants.show', $plant->Plant_ID) }}" class="bg-blue-50 border border-blue-500 p-2 rounded-lg shadow-md hover:bg-blue-100">
                                 <i class="ph ph-eye block text-blue-500"></i>
                             </a>
+                            @can('edit-student')
                             <a href="{{ route('plants.edit', $plant->Plant_ID) }}" class="bg-yellow-50 border border-yellow-500 p-2 rounded-lg shadow-md hover:bg-yellow-100">
                                 <i class="ph ph-note-pencil block text-yellow-500"></i>
                             </a>
+                            @endcan
+                            @can('destroy-student')
                             <form onsubmit="return confirm('Are you sure?')" method="POST" action="{{ route('plants.destroy', $plant->Plant_ID) }}">
                                 @method("DELETE")
                                 @csrf
@@ -46,6 +49,7 @@
                                     <i class="ph ph-trash-simple block text-red-500"></i>
                                 </button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                 @empty

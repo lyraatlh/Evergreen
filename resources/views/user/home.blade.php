@@ -15,21 +15,23 @@
 
 <!-- Header Section -->
 <header class="container mx-auto py-3 flex justify-between items-center px-4">
-    <a href="{{ url('/') }}" class="text-white text-lg font-bold">Ever<span>green</span></a>
+    <a href="{{ route('user.home') }}" class="text-white text-lg font-bold">Ever<span>green</span></a>
     <nav class="flex space-x-6"> 
-        <a href="{{ route('home') }}" class="hover:underline">Home</a>
+        <a href="{{ route('user.home') }}" class="hover:underline">Home</a>
         @auth
-            @if(Auth::user()->isAdmin())
-                <a href="{{ route('catalogs.index') }}" class="hover:underline">Catalog</a>
-                <a href="{{ route('plants.index') }}" class="hover:underline">Shop</a> 
-                <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
+            @if(Auth::user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="hover:underline">Dashboard</a>
+                <a href="{{ route('admin.plants.index') }}" class="hover:underline">Manage Plants</a>
+                <a href="{{ route('admin.catalogs.index') }}" class="hover:underline">Manage Catalog</a>
+                <a href="{{ route('admin.profile.index') }}" class="hover:underline">Profile</a>
+            @else
+                <a href="{{ route('user.catalog') }}" class="hover:underline">Catalog</a>
+                <a href="{{ route('user.shop') }}" class="hover:underline">Shop</a>
+                <a href="{{ route('user.profile.index') }}" class="hover:underline">Profile</a>
             @endif
-            <a href="{{ route('profile') }}" class="hover:underline">Profile</a>
-            <form action="{{ route('logout') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="hover:underline">Logout</button>
-            </form>
         @else
+            <a href="{{ route('catalogs.index') }}" class="hover:underline">Catalog</a>
+            <a href="{{ route('shop') }}" class="hover:underline">Shop</a>
             <a href="{{ route('login') }}" class="hover:underline">Login</a>
             <a href="{{ route('register') }}" class="hover:underline">Register</a>
         @endauth
@@ -45,9 +47,15 @@
             <p class="text-gray-300 text-lg mb-6 w-2/3">
                 We are more than just a houseplant store – we are your partner in creating a greener world. By purchasing from us, you contribute directly to global reforestation efforts and environmental sustainability. Every product you buy plants a tree, reducing carbon footprints, restoring ecosystems, and inspiring positive change for future generations.
             </p>
-            <a href="{{ url('/shop') }}" class="bg-white text-green-900 hover:bg-gray-300 px-6 py-3 rounded-lg text-lg">
-            Order Now!
-            </a>
+            @auth
+                <a href="{{ route('user.shop') }}" class="bg-white text-green-900 hover:bg-gray-300 px-6 py-3 rounded-lg text-lg">
+                Order Now!
+                </a>
+            @else
+                <a href="{{ route('shop') }}" class="bg-white text-green-900 hover:bg-gray-300 px-6 py-3 rounded-lg text-lg">
+                Order Now!
+                </a>
+            @endauth
             <div class="absolute bottom-10 text-center w-full">
                 <a href="#plants" class="inline-block animate-bounce text-gray-300">↓</a>
             </div>
@@ -193,12 +201,6 @@
     }
 </style>
 
-<!-- JavaScript to handle button click -->
-<script>
-    document.getElementById("orderNowBtn").addEventListener("click", function() {
-        window.location.href = "{{ url('/shop') }}";
-    });
-</script>
-
 </body>
 </html>
+@endsection

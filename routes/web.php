@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 
 // Halaman awal
 Route::get('/', function () {
@@ -37,8 +38,24 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('plants', ProductController::class);
 });
 
-// Shop route (public access to view plants)
-Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
+// User
+Route::prefix('user')->name('user.')->middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/home', [HomeController::class, "index"])->name('home');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+    Route::get('/home', function () {
+        return view('user.home');
+    })->name('home');
+    
+    Route::get('/catalog', function () {
+        return view('user.catalog');
+    })->name('catalog');
+    
+    Route::get('/shop', function () {
+        return view('user.shop');
+    })->name('shop');
+    
+});
 
 // Redirect untuk backward compatibility
 Route::middleware('auth')->group(function () {
@@ -48,4 +65,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return redirect()->route('admin.profile.index');
     });
+    Route::get('/home', function () {
+        return redirect()->route('user.home');
+    });
+    Route::get('/profile', function () {
+        return redirect()->route('user.profile.index');
+    });
 });
+
+// Public routes (accessible without login)
+Route::get('/home', function () {
+    return view('user.home');
+})->name('home');
+
+Route::get('/catalog', function () {
+    return view('catalog');
+})->name('catalogs.index');
+
+Route::get('/shop', function () {
+    return view('shop');
+})->name('shop');

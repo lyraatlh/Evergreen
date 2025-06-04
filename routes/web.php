@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 // Halaman awal
 Route::get('/', function () {
@@ -41,7 +43,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 // User
 Route::prefix('user')->name('user.')->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/home', [HomeController::class, "index"])->name('home');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/home', function () {
         return view('user.home');
@@ -63,7 +66,11 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('admin.dashboard');
     });
     Route::get('/profile', function () {
-        return redirect()->route('admin.profile.index');
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.profile.index');
+        } else {
+            return redirect()->route('user.profile.index');
+        }
     });
     Route::get('/home', function () {
         return redirect()->route('user.home');

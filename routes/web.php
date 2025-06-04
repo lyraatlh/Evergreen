@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\UserCatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
@@ -45,14 +46,12 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'role:user'])->group(f
     Route::get('/home', [HomeController::class, "index"])->name('home');
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+    Route::get('/catalog', [UserCatalogController::class, 'index'])->name('catalog');
+    Route::get('/catalog/{typeId}', [UserCatalogController::class, 'show'])->name('catalog.show');    
 
     Route::get('/home', function () {
         return view('user.home');
     })->name('home');
-    
-    Route::get('/catalog', function () {
-        return view('user.catalog');
-    })->name('catalog');
     
     Route::get('/shop', function () {
         return view('user.shop');
@@ -85,9 +84,7 @@ Route::get('/home', function () {
     return view('user.home');
 })->name('home');
 
-Route::get('/catalog', function () {
-    return view('catalog');
-})->name('catalogs.index');
+Route::get('/catalog', [UserCatalogController::class, 'index'])->name('catalogs.index');
 
 Route::get('/shop', function () {
     return view('shop');

@@ -1,6 +1,6 @@
 <x-default-layout title="Plant" section_title="Add New Plant">
     <div class="grid grid-cols-3 gap-6">
-        <form action="{{ route('admin.plants.store') }}" method="POST" 
+        <form action="{{ route('admin.plants.store') }}" method="POST" enctype="multipart/form-data" 
             class="flex flex-col gap-6 px-8 py-6 bg-white rounded-lg border border-blue-200 shadow-lg col-span-3 md:col-span-2">
             @csrf
             @method("POST")
@@ -66,7 +66,28 @@
                     <div class="text-red-500 text-sm">{{ $message }}</div>
                 @enderror
             </div>
+            
+            <!-- Image URL Input -->
+            <div class="flex flex-col gap-2">
+                <label for="image_url" class="text-blue-600 font-semibold">Image URL</label>
+                <input type="text" id="image_url" name="image_url" 
+                    class="px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-50"
+                    placeholder="https://example.com/image.jpg" value="{{ old('image_url') }}">
+                @error('image_url')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
 
+            <!-- Image Upload Input -->
+            <div class="flex flex-col gap-2">
+                <label for="image_file" class="text-blue-600 font-semibold">Upload Image</label>
+                <input type="file" id="image_file" name="image_file" 
+                    class="px-4 py-2 border border-blue-300 rounded-lg bg-blue-50 file:border-0 file:bg-blue-200 file:text-blue-700 file:px-4 file:py-2 file:rounded-md file:cursor-pointer">
+                @error('image_file')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
+            
             <!-- Action Buttons -->
             <div class="flex gap-4 justify-end">
                 <a href="{{ route('admin.plants.index') }}" 

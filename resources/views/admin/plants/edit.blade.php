@@ -67,6 +67,34 @@
                 @enderror
             </div>
 
+            <!-- Existing Images Preview -->
+            @if ($plant->image && count($plant->image))
+                <div class="flex flex-col gap-2">
+                    <label class="text-blue-600 font-semibold">Current Images</label>
+                    <div class="flex flex-wrap gap-4">
+                        @foreach ($plant->image as $img)
+                            <img src="{{ $img->image_url }}" alt="Plant Image" class="w-24 h-24 object-cover rounded border">
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+            
+            <!-- Or New Image URL -->
+            <div class="flex flex-col gap-2">
+                <label for="image_url" class="text-blue-600 font-semibold">New Image URL</label>
+                <input type="text" id="image_url" name="image_url"
+                    class="px-4 py-2 bg-blue-50 border border-blue-300 rounded-lg"
+                    placeholder="https://example.com/image.jpg">
+            </div>
+
+            <!-- Upload New Image -->
+            <div class="flex flex-col gap-2">
+                <label for="image_upload" class="text-blue-600 font-semibold">Upload New Image</label>
+                <input type="file" id="image_upload" name="image_upload"
+                    class="px-4 py-2 bg-blue-50 border border-blue-300 rounded-lg">
+            </div>
+
+
             <!-- Action Buttons -->
             <div class="flex gap-4 justify-end">
                 <a href="{{ route('admin.plants.index') }}" 

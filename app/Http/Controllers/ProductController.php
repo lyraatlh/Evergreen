@@ -41,15 +41,33 @@ class ProductController extends Controller
             'Type_ID' => 'required|exists:plant_type,Type_ID',
             'Price' => 'required|numeric|min:0',
             'Stock' => 'required|integer|min:0',
+            'image_url' => 'nullable|url',
+            'image_file' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        DimPlant::create([
+        $plant = DimPlant::create([
             'Plant_ID' => $validated['Plant_ID'],
             'Plant_Name' => $validated['Plant_Name'],
             'Type_ID' => $validated['Type_ID'],
             'Price' => $validated['Price'],
             'Stock' => $validated['Stock'],
         ]);
+
+        // Simpan gambar jika ada input
+        if ($request->has('image_url') && $request->image_url != null) {
+            \App\Models\PlantImage::create([
+                'Plant_ID' => $plant->Plant_ID,
+                'image_url' => $request->image_url,
+            ]);
+        }
+
+        if ($request->hasFile('image_file')) {
+            $path = $request->file('image_file')->store('plant_images', 'public');
+            \App\Models\PlantImage::create([
+                'Plant_ID' => $plant->Plant_ID,
+                'image_url' => '/storage/' . $path,
+            ]);
+        }
 
         return redirect()->route('admin.plants.index')->with('success', 'Plant created successfully');
     }
@@ -71,7 +89,7 @@ class ProductController extends Controller
         // }
 
         $plant = DimPlant::findOrFail($id);
-        $types = Catalog::all(); // ganti dari $catalogs ke $types
+        $types = Catalog::all();
         return view('admin.plants.edit', compact('plant', 'types'));
     }
 
@@ -89,6 +107,8 @@ class ProductController extends Controller
             'Type_ID' => 'required|exists:plant_type,Type_ID',
             'Price' => 'required|numeric|min:0',
             'Stock' => 'required|integer|min:0',
+            'image_url' => 'nullable|url',
+            'image_file' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $plant->update([
@@ -98,6 +118,31 @@ class ProductController extends Controller
             'Price' => $validated['Price'],
             'Stock' => $validated['Stock'],
         ]);
+
+        // Hapus gambar lama jika ada update gambar baru
+        if ($request->has('image_url') && $request->image_url != null) {
+            // Hapus semua image lama
+            $plant->image()->delete();
+
+            // Simpan image baru dari URL
+            \App\Models\PlantImage::create([
+                'Plant_ID' => $plant->Plant_ID,
+                'image_url' => $request->image_url,
+            ]);
+        }
+
+        if ($request->hasFile('image_upload')) {
+            // Hapus semua image lama
+            $plant->image()->delete();
+
+            // Upload dan simpan image baru dari file
+            $path = $request->file('image_upload')->store('plant_images', 'public');
+
+            \App\Models\PlantImage::create([
+                'Plant_ID' => $plant->Plant_ID,
+                'image_url' => '/storage/' . $path,
+            ]);
+        }
 
         return redirect()->route('admin.plants.index')->with('success', 'Plant updated successfully');
     }

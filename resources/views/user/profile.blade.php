@@ -6,8 +6,8 @@
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
     <div class="container mx-auto py-4 flex justify-between items-center px-6">
-        <a href="{{ route('home') }}" class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-            Ever<span class="text-emerald-800">green</span>
+        <a href="{{ route('home') }}" class="text-2xl font-bold bg-gradient-to-r from-teal-500 to-emerald-900 bg-clip-text text-transparent">
+            Evergreen
         </a>
         <nav class="flex space-x-8"> 
             <a href="{{ route('home') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Home</a>
@@ -22,8 +22,9 @@
                     <a href="{{ route('user.shop') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Shop</a>
                     <a href="{{ route('user.profile.index') }}" class="text-emerald-600 font-semibold">Profile</a>
                 @endif
-                <form action="{{ route('auth.logout') }}" method="POST" class="inline">
+                <form action="{{ route('auth.logout') }}" method="POST">
                     @csrf
+                    @method('DELETE')
                     <button type="submit" class="text-gray-700 hover:text-red-600 transition-colors duration-300 font-medium">Logout</button>
                 </form>
             @else

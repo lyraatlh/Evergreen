@@ -6,8 +6,8 @@
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
     <div class="container mx-auto py-4 flex justify-between items-center px-6">
-        <a href="{{ route('home') }}" class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-            Ever<span class="text-emerald-800">green</span>
+        <a href="{{ route('home') }}" class="text-2xl font-bold bg-gradient-to-r from-teal-500 to-emerald-900 bg-clip-text text-transparent">
+            Evergreen
         </a>
         <nav class="flex space-x-8"> 
             <a href="{{ route('home') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Home</a>
@@ -43,12 +43,12 @@
         <!-- Modern Filter Buttons -->
         <div class="flex flex-wrap justify-center gap-4 mb-16">
             <a href="{{ route('user.catalog', ['type' => 'all']) }}" 
-               class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType === 'all' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
+            class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType === 'all' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
                 See All
             </a>
             @foreach($catalogs as $catalog)
                 <a href="{{ route('user.catalog', ['type' => $catalog->Type_ID]) }}" 
-                   class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType == $catalog->Type_ID ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
+                class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType == $catalog->Type_ID ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
                     {{ $catalog->Type_Name }}
                 </a>
             @endforeach

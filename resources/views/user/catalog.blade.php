@@ -120,14 +120,9 @@
                         @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         
-                        <!-- Price Badge -->
-                        <div class="absolute top-4 left-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full font-bold">
-                            ${{ number_format($plant->Price, 0) }}
-                        </div>
-                        
                         <!-- Stock Badge -->
                         @if($plant->Stock > 0)
-                            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            <div class="absolute top-4 right-4 bg-blue-400 text-white px-3 py-1 rounded-full text-sm font-medium">
                                 {{ $plant->Stock }} in stock
                             </div>
                         @else
@@ -148,7 +143,7 @@
                         
                         <div class="flex justify-between items-center">
                             <div class="text-2xl font-bold text-emerald-600">
-                                ${{ number_format($plant->Price, 0) }}
+                                Rp.{{ number_format($plant->Price, 0) }}
                             </div>
                             @if($plant->Stock > 0)
                                 <button class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">

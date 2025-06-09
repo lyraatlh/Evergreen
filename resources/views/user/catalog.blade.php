@@ -22,6 +22,16 @@
                     <a href="{{ route('user.shop') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Shop</a>
                     <a href="{{ route('user.profile.index') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Profile</a>
                 @endif
+                @if(Auth::user()->role === 'user')
+                    <a href="{{ route('user.cart') }}" class="relative text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">
+                        Cart
+                        @if(isset($cartCount) && $cartCount > 0)
+                            <span class="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
+                @endif
             @else
                 <a href="{{ route('catalogs.index') }}" class="text-emerald-600 font-semibold">Catalog</a>
                 <a href="{{ route('shop') }}" class="text-gray-700 hover:text-emerald-600 transition-colors duration-300 font-medium">Shop</a>
@@ -146,9 +156,14 @@
                                 Rp.{{ number_format($plant->Price, 0) }}
                             </div>
                             @if($plant->Stock > 0)
-                                <button class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">
-                                    Add to Cart
-                                </button>
+                                <form action="{{ route('user.cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="plant_id" value="{{ $plant->Plant_ID }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">
+                                        Add to Cart
+                                    </button>
+                                </form>
                             @else
                                 <button disabled class="bg-gray-400 text-white px-6 py-2 rounded-full cursor-not-allowed font-medium">
                                     Out of Stock

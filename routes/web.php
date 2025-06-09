@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserShopController;
 use Illuminate\Support\Facades\Auth;
 
 // Halaman awal
@@ -44,19 +45,24 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 // User
 Route::prefix('user')->name('user.')->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/home', [HomeController::class, "index"])->name('home');
+
+    // Profile
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-    Route::get('/catalog', [UserCatalogController::class, 'index'])->name('catalog');
-    Route::get('/catalog/{typeId}', [UserCatalogController::class, 'show'])->name('catalog.show');    
 
-    Route::get('/home', function () {
-        return view('user.home');
-    })->name('home');
+    // Catalog
+    Route::get('/catalog', [UserCatalogController::class, 'index'])->name('catalog');
+    Route::get('/catalog/{typeId}', [UserCatalogController::class, 'show'])->name('catalog.show');
     
-    Route::get('/shop', function () {
-        return view('user.shop');
-    })->name('shop');
-    
+    // Shop
+    Route::get('/shop', [UserShopController::class, 'index'])->name('shop');
+    Route::post('/cart/add', [UserShopController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [UserShopController::class, 'viewCart'])->name('cart');
+    Route::post('/cart/update', [UserShopController::class, 'updateCart'])->name('cart.update');
+    Route::get('/cart/remove/{plantId}', [UserShopController::class, 'removeFromCart'])->name('cart.remove');
+    Route::get('/checkout', [UserShopController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/process', [UserShopController::class, 'processCheckout'])->name('checkout.process');
+    Route::get('/order/success', [UserShopController::class, 'orderSuccess'])->name('order.success');
 });
 
 // Redirect untuk backward compatibility

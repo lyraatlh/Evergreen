@@ -14,12 +14,12 @@ class Orders extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'Customer_ID', 'Plant_Name', 'Quantity', 'total_price'
+        'Customer_ID', 'Plant_ID', 'Quantity', 'total_price'
     ];
 
     public function plant()
     {
-        return $this->belongsTo(DimPlant::class, 'Plant_Name');
+        return $this->belongsTo(DimPlant::class, 'Plant_ID');
     }
 
     public function customer()

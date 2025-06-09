@@ -74,16 +74,17 @@
 
             <div class="lg:col-span-1">
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                    <video
-                        src="video.mp4"
-                        poster="bg.jpg"
-                        controls 
-                        class="w-full h-80 object-cover">
-                        Your browser does not support the video tag.
-                    </video>
+                    <iframe 
+                        class="w-full h-80"
+                        src="https://www.youtube.com/embed/xbBdIG--b58" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
-            
+
             <div class="lg:col-span-1">
                 <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-2xl">
                     <p class="text-gray-700 text-lg leading-relaxed">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100">
+<div class="min-h-screen bg-[#d7e1d9]">
 
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
@@ -53,12 +53,12 @@
         <!-- Modern Filter Buttons -->
         <div class="flex flex-wrap justify-center gap-4 mb-16">
             <a href="{{ route('user.catalog', ['type' => 'all']) }}" 
-            class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType === 'all' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
+            class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType === 'all' ? 'bg-[#729679] text-white' : 'bg-white text-gray-700 hover:bg-[#c2d2c5] hover:text-[#729679] border border-[#729679]' }}">
                 See All
             </a>
             @foreach($catalogs as $catalog)
                 <a href="{{ route('user.catalog', ['type' => $catalog->Type_ID]) }}" 
-                class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType == $catalog->Type_ID ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200' }}">
+                class="px-8 py-3 rounded-full transition-all duration-300 font-medium shadow-lg {{ $selectedType == $catalog->Type_ID ? 'bg-[#729679] text-white' : 'bg-white text-gray-700 hover:bg-[#c2d2c5] hover:text-[#729679] border border-[#729679]' }}">
                     {{ $catalog->Type_Name }}
                 </a>
             @endforeach
@@ -144,7 +144,7 @@
                     
                     <div class="p-6">
                         <div class="mb-2">
-                            <span class="inline-block bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-medium">
+                            <span class="inline-block bg-[#c2d2c5] text-black-700 px-3 py-1 rounded-full text-sm font-medium">
                                 {{ $plant->type->Type_Name ?? 'Unknown Type' }}
                             </span>
                         </div>
@@ -152,7 +152,7 @@
                         <p class="text-gray-600 mb-4">Perfect for indoor and outdoor decoration</p>
                         
                         <div class="flex justify-between items-center">
-                            <div class="text-2xl font-bold text-emerald-600">
+                            <div class="text-2xl font-bold text-[#729679]">
                                 Rp.{{ number_format($plant->Price, 0) }}
                             </div>
                             @if($plant->Stock > 0)
@@ -160,7 +160,7 @@
                                     @csrf
                                     <input type="hidden" name="plant_id" value="{{ $plant->Plant_ID }}">
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">
+                                    <button type="submit" class="bg-[#729679] text-white px-4 py-2 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-medium">
                                         Add to Cart
                                     </button>
                                 </form>

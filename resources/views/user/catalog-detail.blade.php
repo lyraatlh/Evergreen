@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100">
+<div class="min-h-screen bg-[#d7e1d9]">
 
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
@@ -75,11 +75,6 @@
                             @endif
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             
-                            <!-- Price Badge -->
-                            <div class="absolute top-4 left-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full font-bold">
-                                ${{ number_format($plant->Price, 0) }}
-                            </div>
-                            
                             <!-- Stock Badge -->
                             @if($plant->Stock > 0)
                                 <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -97,11 +92,11 @@
                             <p class="text-gray-600 mb-4">Perfect for indoor and outdoor decoration</p>
                             
                             <div class="flex justify-between items-center">
-                                <div class="text-2xl font-bold text-emerald-600">
+                                <div class="text-2xl font-bold text-[#5d8765]">
                                     ${{ number_format($plant->Price, 0) }}
                                 </div>
                                 @if($plant->Stock > 0)
-                                    <button class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">
+                                    <button class="bg-[#729679] text-white px-4 py-2 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-medium">
                                         Add to Cart
                                     </button>
                                 @else

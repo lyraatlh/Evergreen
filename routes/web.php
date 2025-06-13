@@ -53,9 +53,16 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'role:user'])->group(f
     // Catalog
     Route::get('/catalog', [UserCatalogController::class, 'index'])->name('catalog');
     Route::get('/catalog/{typeId}', [UserCatalogController::class, 'show'])->name('catalog.show');
+
+     // Favorites
+    Route::get('/favorites', [UserShopController::class, 'viewFavorites'])->name('favorites');
+    Route::get('/favorites/add/{plantId}', [UserShopController::class, 'addToFavorites'])->name('favorites.add');
     
     // Shop
     Route::get('/shop', [UserShopController::class, 'index'])->name('shop');
+    Route::get('/shop/{id}', [UserShopController::class, 'show'])->name('shop.show');
+
+    // Cart and Checkout
     Route::post('/cart/add', [UserShopController::class, 'addToCart'])->name('cart.add');
     Route::get('/cart', [UserShopController::class, 'viewCart'])->name('cart');
     Route::post('/cart/update', [UserShopController::class, 'updateCart'])->name('cart.update');

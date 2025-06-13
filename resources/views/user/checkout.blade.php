@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100">
+<div class="min-h-screen bg-[#d7e1d9]">
 
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
@@ -48,7 +48,7 @@
                             
                             <div>
                                 <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Shipping Address</label>
-                                <textarea id="address" name="address" rows="3" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"></textarea>
+                                <textarea id="address" name="address" rows="3" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#729679] focus:border-transparent"></textarea>
                                 @error('address')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -56,7 +56,7 @@
                             
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                <input type="text" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                                <input type="text" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#729679] focus:border-transparent">
                                 @error('phone')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -84,10 +84,10 @@
                             </div>
                             
                             <div class="pt-6 border-t border-gray-200">
-                                <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-semibold">
+                                <button type="submit" class="w-full bg-[#729679] text-white px-8 py-3 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-semibold">
                                     Place Order
                                 </button>
-                                <a href="{{ route('user.cart') }}" class="block w-full text-center mt-4 text-emerald-600 hover:text-emerald-800">
+                                <a href="{{ route('user.cart') }}" class="block w-full text-center mt-4 text-[#729679] hover:text-[#c2d2c5]">
                                     Back to Cart
                                 </a>
                             </div>
@@ -105,7 +105,7 @@
                         @foreach($cart as $item)
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center">
-                                    <span class="bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full flex items-center justify-center mr-2">
+                                    <span class="bg-[#c2d2c5] text-[#729679] w-6 h-6 rounded-full flex items-center justify-center mr-2">
                                         {{ $item['quantity'] }}
                                     </span>
                                     <span class="text-gray-700">{{ $item['name'] }}</span>
@@ -127,17 +127,17 @@
                         <div class="border-t border-gray-200 pt-4 mt-4">
                             <div class="flex justify-between">
                                 <span class="text-lg font-bold">Total</span>
-                                <span class="text-lg font-bold text-emerald-600">${{ number_format($total, 0) }}</span>
+                                <span class="text-lg font-bold text-[#729679]">${{ number_format($total, 0) }}</span>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Donation Notice -->
                     @if($showDonation)
-                        <div class="mt-6 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-xl p-4">
+                        <div class="mt-6 bg-[#c2d2c5] rounded-xl p-4">
                             <div class="flex items-center">
                                 <span class="text-2xl mr-2">🌳</span>
-                                <p class="text-sm text-emerald-800">
+                                <p class="text-sm text-black-800">
                                     <strong>Thank you!</strong> A tree seedling will be donated to our reforestation project.
                                 </p>
                             </div>

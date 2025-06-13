@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DimPlant;
 use App\Models\Orders;
 use App\Models\Cart;
+use App\Models\Favorite;
+use App\Models\Catalog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -26,13 +28,94 @@ class UserShopController extends Controller
             ->take(6)
             ->get();
             
+        // Get all catalogs with their plants
+        $catalogs = Catalog::with(['plants.image'])->get();
+        
+        // Get cart count if user is logged in
+        $cartCount = 0;
+        if (Auth::check()) {
+            $cartCount = $this->getCartCount();
+            
+            // Get user favorites
+            $favorites = Favorite::where('Customer_ID', Auth::id())
+                ->pluck('Plant_ID')
+                ->toArray();
+        } else {
+            $favorites = [];
+        }
+        
+        return view('user.shop', compact('featuredPlants', 'latestPlants', 'catalogs', 'cartCount', 'favorites'));
+    }
+    
+    public function show($id)
+    {
+        $plant = DimPlant::with(['type', 'image'])->findOrFail($id);
+        
+        // Get related plants (same type)
+        $relatedPlants = DimPlant::with(['type', 'image'])
+            ->where('Type_ID', $plant->Type_ID)
+            ->where('Plant_ID', '!=', $plant->Plant_ID)
+            ->take(3)
+            ->get();
+            
+        // Check if plant is in favorites
+        $isFavorite = false;
+        if (Auth::check()) {
+            $isFavorite = Favorite::where('Customer_ID', Auth::id())
+                ->where('Plant_ID', $id)
+                ->exists();
+        }
+        
         // Get cart count if user is logged in
         $cartCount = 0;
         if (Auth::check()) {
             $cartCount = $this->getCartCount();
         }
         
-        return view('user.shop', compact('featuredPlants', 'latestPlants', 'cartCount'));
+        return view('user.shop-detail', compact('plant', 'relatedPlants', 'isFavorite', 'cartCount'));
+    }
+    
+    public function addToFavorites($plantId)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to add favorites.');
+        }
+        
+        $userId = Auth::id();
+        
+        // Check if already in favorites
+        $favorite = Favorite::where('Customer_ID', $userId)
+            ->where('Plant_ID', $plantId)
+            ->first();
+            
+        if ($favorite) {
+            // Already in favorites, remove it
+            $favorite->delete();
+            return redirect()->back()->with('success', 'Plant removed from favorites.');
+        } else {
+            // Add to favorites
+            Favorite::create([
+                'Customer_ID' => $userId,
+                'Plant_ID' => $plantId
+            ]);
+            return redirect()->back()->with('success', 'Plant added to favorites.');
+        }
+    }
+    
+    public function viewFavorites()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to view favorites.');
+        }
+        
+        $favorites = Favorite::where('Customer_ID', Auth::id())
+            ->with('plant.type', 'plant.image')
+            ->get();
+            
+        // Get cart count
+        $cartCount = $this->getCartCount();
+        
+        return view('user.favorites', compact('favorites', 'cartCount'));
     }
     
     public function addToCart(Request $request)

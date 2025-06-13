@@ -97,7 +97,7 @@
 </section>
 
 <!-- Modern FAQ Section -->
-<section class="py-40 bg-gradient-to-br from-gray-50 to-emerald-50">
+<section class="py-40 bg-[#d7e1d9]">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-5xl font-bold text-gray-900 mb-6">Quality Plants & Sustainable Goods</h2>

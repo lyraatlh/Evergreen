@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100">
+<div class="min-h-screen bg-[#d7e1d9]">
 
 <!-- Modern Header Section -->
 <header class="backdrop-blur-md bg-white/90 shadow-lg sticky top-0 z-50">
@@ -23,9 +23,9 @@
 <section class="py-20">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-500 p-8 text-center">
+            <div class="bg-[#729679] p-8 text-center">
                 <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-5xl text-emerald-500">✓</span>
+                    <span class="text-5xl text-[#729679]">✓</span>
                 </div>
                 <h1 class="text-4xl font-bold text-white mb-2">Order Successful!</h1>
                 <p class="text-emerald-100 text-lg">Thank you for your purchase.</p>
@@ -54,10 +54,10 @@
                 @endif
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="{{ route('user.catalog') }}" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-3 rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-medium">
+                    <a href="{{ route('user.catalog') }}" class="bg-[#729679] text-white px-8 py-3 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-medium">
                         Continue Shopping
                     </a>
-                    <a href="{{ route('user.profile.index') }}" class="border-2 border-emerald-600 text-emerald-600 px-8 py-3 rounded-full hover:bg-emerald-600 hover:text-white transition-all duration-300 font-medium">
+                    <a href="{{ route('user.profile.index') }}" class="border-2 border-[#729679] text-[#729679] px-8 py-3 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-medium">
                         View Profile
                     </a>
                 </div>

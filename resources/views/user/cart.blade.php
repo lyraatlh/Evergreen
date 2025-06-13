@@ -46,7 +46,7 @@
             <div class="bg-white rounded-3xl shadow-2xl overflow-hidden mb-8">
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                        <thead class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
+                        <thead class="bg-[#729679] text-white">
                             <tr>
                                 <th class="py-4 px-6 text-left">Product</th>
                                 <th class="py-4 px-6 text-center">Price</th>
@@ -80,7 +80,7 @@
                                                 <input type="number" name="quantity" id="quantity-{{ $plantId }}" value="{{ $item['quantity'] }}" min="1" class="w-12 text-center py-1 border-none focus:outline-none focus:ring-0">
                                                 <button type="button" onclick="incrementQuantity('{{ $plantId }}')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-r-lg">+</button>
                                             </div>
-                                            <button type="submit" class="ml-2 text-emerald-600 hover:text-emerald-800">
+                                            <button type="submit" class="ml-2 text-[#729679] hover:text-[#c2d2c5]">
                                                 Update
                                             </button>
                                         </form>
@@ -116,16 +116,16 @@
                         <div class="border-t border-gray-200 pt-4 mt-4">
                             <div class="flex justify-between">
                                 <span class="text-lg font-bold">Total</span>
-                                <span class="text-lg font-bold text-emerald-600">${{ number_format($total, 0) }}</span>
+                                <span class="text-lg font-bold text-[#729679]">${{ number_format($total, 0) }}</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-8">
-                        <a href="{{ route('user.checkout') }}" class="block w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 font-semibold text-center">
+                        <a href="{{ route('user.checkout') }}" class="block w-full bg-[#729679] text-white px-6 py-3 rounded-xl hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-semibold text-center">
                             Proceed to Checkout
                         </a>
-                        <a href="{{ route('user.catalog') }}" class="block w-full text-center mt-4 text-emerald-600 hover:text-emerald-800">
+                        <a href="{{ route('user.catalog') }}" class="block w-full text-center mt-4 text-[#729679] hover:text-[#c2d2c5]">
                             Continue Shopping
                         </a>
                     </div>
@@ -156,12 +156,12 @@
             </div>
         @else
             <div class="text-center py-16">
-                <div class="w-32 h-32 bg-gradient-to-br from-teal-400 to-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div class="w-32 h-32 bg-[#729679] rounded-full flex items-center justify-center mx-auto mb-6">
                     <span class="text-6xl text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#292929" viewBox="0 0 256 256"><path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"></path></svg></span>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Your Cart is Empty</h3>
                 <p class="text-gray-600 mb-8">Looks like you haven't added any plants to your cart yet.</p>
-                <a href="{{ route('user.catalog') }}" class="bg-gradient-to-r from-blue-400 to-teal-500 text-white px-8 py-3 rounded-full hover:from-teal-500 hover:to-teal-600 transition-all duration-300 font-medium">
+                <a href="{{ route('user.catalog') }}" class="bg-[#729679] text-white px-8 py-3 rounded-full hover:bg-[#c2d2c5] hover:text-white transition-all duration-300 font-medium">
                     Start Shopping
                 </a>
             </div>

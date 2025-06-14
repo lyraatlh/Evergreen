@@ -54,7 +54,7 @@
                 Explore our beautiful collection of {{ strtolower($catalog->Type_Name) }} perfect for your space.
             </p>
             <div class="mt-8">
-                <span class="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-full font-bold text-lg">
+                <span class="inline-block bg-[#729679] text-white px-6 py-3 rounded-full font-bold text-lg">
                     {{ $plants->count() }} Plants Available
                 </span>
             </div>
@@ -77,7 +77,7 @@
                             
                             <!-- Stock Badge -->
                             @if($plant->Stock > 0)
-                                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                <div class="absolute top-4 right-4 bg-blue-400 text-white px-3 py-1 rounded-full text-sm font-medium">
                                     {{ $plant->Stock }} in stock
                                 </div>
                             @else
